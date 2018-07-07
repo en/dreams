@@ -4,6 +4,7 @@
   "description": "做人如果没梦想，跟咸鱼有什么分别？",
   "main": "index.js",
   "scripts": {
+    "dreams": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/en/dreams#readme",
   "dependencies": {
     "ethereumjs-util": "^5.2.0",
+    "truffle-contract": "^3.0.6",
     "web3": "^1.0.0-beta.34"
   }
 }
