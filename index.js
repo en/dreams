@@ -103,15 +103,19 @@ const main = async () => {
 
     const address = ethUtil.privateToAddress(new Buffer(pk, 'hex'))
     const hexAddress = address.toString('hex')
-    const ethBalance = await web3.eth.getBalance(hexAddress)
-    if (ethBalance > 0) {
-      console.log(`pk: ${pk}\neth: ${ethBalance}`)
-    }
-    for (let i in contracts) {
-      const tokenBalance = await contracts[i].balanceOf('0x' + hexAddress)
-      if (tokenBalance > 0) {
-        console.log(`pk: ${pk}\n${tokens[i].contract}: ${tokenBalance}`)
+    try {
+      const ethBalance = await web3.eth.getBalance(hexAddress)
+      if (ethBalance > 0) {
+        console.log(`pk: ${pk}\neth: ${ethBalance}`)
       }
+      for (let i in contracts) {
+        const tokenBalance = await contracts[i].balanceOf('0x' + hexAddress)
+        if (tokenBalance > 0) {
+          console.log(`pk: ${pk}\n${tokens[i].contract}: ${tokenBalance}`)
+        }
+      }
+    } catch (err) {
+      console.log('error:', err)
     }
   }
 }
