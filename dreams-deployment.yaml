@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: dreams
+  name: dreams
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: dreams
+  template:
+    metadata:
+      labels:
+        run: dreams
+    spec:
+      containers:
+      - image: gcr.io/bxx-ex/github-en-dreams
+        name: dreams
+        env:
+        - name: WEBSOCKET_PROVIDER
+          value: "ws://localhost:8546"
