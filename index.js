@@ -102,7 +102,7 @@ const main = async () => {
       ]
     }
 
-    const address = ethUtil.privateToAddress(new Buffer(pk, 'hex'))
+    const address = ethUtil.privateToAddress(Buffer.from(pk, 'hex'))
     const hexAddress = address.toString('hex')
     try {
       const ethBalance = await web3.eth.getBalance(hexAddress)
