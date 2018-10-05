@@ -67,7 +67,8 @@ const tokens = [
   }
 ]
 
-const web3 = new Web3(Web3.givenProvider || 'ws://localhost:8546')
+const websocketProvider = process.env.WEBSOCKET_PROVIDER || 'ws://localhost:8546'
+const web3 = new Web3(Web3.givenProvider || websocketProvider)
 
 const main = async () => {
   const contracts = []
