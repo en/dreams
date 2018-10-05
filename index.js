@@ -67,7 +67,7 @@ const tokens = [
   }
 ]
 
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+const web3 = new Web3(Web3.givenProvider || 'ws://localhost:8546')
 
 const main = async () => {
   const contracts = []
