@@ -67,7 +67,8 @@ const tokens = [
   }
 ]
 
-const websocketProvider = process.env.WEBSOCKET_PROVIDER || 'ws://localhost:8546'
+const websocketProvider =
+  process.env.WEBSOCKET_PROVIDER || 'ws://localhost:8546'
 const web3 = new Web3(Web3.givenProvider || websocketProvider)
 
 const main = async () => {
@@ -94,6 +95,7 @@ const main = async () => {
     console.log(token.contract, 'loaded.')
   }
 
+  let count = 0
   for (;;) {
     let pk = ''
     for (let n = 0; n < 64; n++) {
@@ -104,6 +106,12 @@ const main = async () => {
 
     const address = ethUtil.privateToAddress(Buffer.from(pk, 'hex'))
     const hexAddress = address.toString('hex')
+
+    count++
+    if (count % 1000 == 0) {
+      console.log(`${count}: try ${hexAddress}`)
+    }
+
     try {
       const ethBalance = await web3.eth.getBalance(hexAddress)
       if (ethBalance > 0) {
@@ -116,7 +124,8 @@ const main = async () => {
         }
       }
     } catch (err) {
-      console.log('error:', err)
+      console.log(err)
+      break
     }
   }
 }
